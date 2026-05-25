@@ -12,7 +12,7 @@ export const SITE = {
   locale: 'ko-KR',
   author: {
     name: '사장',
-    email: 'coqss2@gmail.com',
+    email: 'opennode.kr@gmail.com',
   },
 } as const;
 
