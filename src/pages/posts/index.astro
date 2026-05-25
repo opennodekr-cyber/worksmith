@@ -1,0 +1,19 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PostCard from '@components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()
+);
+---
+
+<BaseLayout title="전체 글" description="OPENNODE 매거진의 모든 글">
+  <section class="container-wide py-12">
+    <h1 class="mb-2">전체 글</h1>
+    <p class="text-muted mb-8">총 {posts.length}편</p>
+    <div>
+      {posts.map((post) => <PostCard post={post} />)}
+    </div>
+  </section>
+</BaseLayout>

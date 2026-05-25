@@ -1,0 +1,28 @@
+---
+import { SITE, NAV } from '@/consts';
+const path = Astro.url.pathname;
+---
+
+<header class="border-b border-border bg-bg/80 backdrop-blur sticky top-0 z-50">
+  <div class="container-wide flex items-center justify-between h-16">
+    <a href="/" class="no-underline font-bold text-lg tracking-tight">
+      {SITE.name}
+    </a>
+
+    <nav class="flex items-center gap-6">
+      {
+        NAV.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              'no-underline text-sm',
+              path.startsWith(item.href) ? 'text-fg font-medium' : 'text-muted hover:text-fg',
+            ]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>

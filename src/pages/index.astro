@@ -1,0 +1,61 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PostCard from '@components/PostCard.astro';
+import NewsletterCTA from '@components/NewsletterCTA.astro';
+import { SITE, CATEGORIES } from '@/consts';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()
+);
+
+const recent = posts.slice(0, 10);
+---
+
+<BaseLayout>
+  <section class="container-wide py-16 md:py-24 border-b border-border">
+    <h1 class="text-4xl md:text-5xl font-bold leading-tight tracking-tight max-w-3xl">
+      {SITE.tagline}
+    </h1>
+    <p class="mt-6 text-lg text-muted max-w-2xl">
+      AI 도구는 100개가 있지만, <em>당신의</em> 1인 기업에 맞는 도구는 3개뿐입니다.
+      <strong class="text-fg">{SITE.name}</strong>은 그 3개를 직접 써보고 알려주는 매거진입니다.
+      <span class="block mt-2 text-sm">
+        벤처 스튜디오 <a href={SITE.parentUrl} target="_blank" rel="noopener">{SITE.parent}</a>의 매거진 사업.
+      </span>
+    </p>
+    <div class="mt-8 flex flex-wrap gap-2">
+      {
+        CATEGORIES.map((cat) => (
+          <a
+            href={`/categories/${cat.slug}`}
+            class="no-underline text-sm border border-border rounded-full px-4 py-1.5 hover:border-accent hover:text-accent transition-colors"
+          >
+            {cat.emoji} {cat.label}
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="container-wide py-12">
+    <div class="flex items-end justify-between mb-6">
+      <h2 class="text-2xl font-bold">최근 글</h2>
+      <a href="/posts" class="text-sm no-underline text-muted hover:text-accent">전체 보기 →</a>
+    </div>
+
+    {
+      recent.length === 0 ? (
+        <p class="text-muted py-12 text-center">
+          아직 발행된 글이 없습니다. <code>src/content/posts/</code> 폴더에 첫 글을 추가해보세요.
+        </p>
+      ) : (
+        <div>
+          {recent.map((post) => <PostCard post={post} />)}
+        </div>
+      )
+    }
+  </section>
+
+  <NewsletterCTA />
+</BaseLayout>

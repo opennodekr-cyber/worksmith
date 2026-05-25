@@ -1,0 +1,30 @@
+---
+// TODO: ConvertKit / Stibee / Buttondown 등 뉴스레터 서비스 연결 후 form action 교체
+---
+
+<section class="bg-surface border-y border-border mt-16">
+  <div class="container-prose py-12 text-center">
+    <h3 class="mb-3">매주 월요일, 사장님이 직접 써본 AI 도구 1개</h3>
+    <p class="text-muted mb-6">
+      뉴스레터에서 무료로. 1인 기업·프리랜서를 위한 한국어 환경 기준 큐레이션.
+    </p>
+    <form
+      class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto"
+      onsubmit="event.preventDefault(); alert('뉴스레터 서비스 연결 필요 — Stibee/ConvertKit');"
+    >
+      <input
+        type="email"
+        name="email"
+        placeholder="email@example.com"
+        required
+        class="flex-1 border border-border bg-bg rounded-md px-4 py-2 focus:outline-none focus:border-accent"
+      />
+      <button
+        type="submit"
+        class="bg-accent text-accent-fg rounded-md px-5 py-2 font-medium hover:opacity-90 transition-opacity"
+      >
+        구독하기
+      </button>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,28 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { CATEGORIES } from '@/consts';
+
+const posts = await getCollection('posts', ({ data }) => !data.draft);
+const countBy = (slug: string) => posts.filter((p) => p.data.category === slug).length;
+---
+
+<BaseLayout title="카테고리" description="OPENNODE 매거진의 카테고리 목록">
+  <section class="container-wide py-12">
+    <h1 class="mb-8">카테고리</h1>
+    <div class="grid sm:grid-cols-2 gap-4">
+      {
+        CATEGORIES.map((cat) => (
+          <a
+            href={`/categories/${cat.slug}`}
+            class="no-underline border border-border rounded-lg p-5 hover:border-accent transition-colors"
+          >
+            <div class="text-3xl mb-2">{cat.emoji}</div>
+            <h2 class="text-lg font-semibold text-fg">{cat.label}</h2>
+            <p class="text-sm text-muted mt-1">{countBy(cat.slug)}편</p>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

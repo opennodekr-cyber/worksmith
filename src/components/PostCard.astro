@@ -1,0 +1,28 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { CATEGORIES } from '@/consts';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+const { title, description, publishedAt, category, experience } = post.data;
+const categoryMeta = CATEGORIES.find((c) => c.slug === category);
+const fmt = new Intl.DateTimeFormat('ko-KR', { year: 'numeric', month: 'short', day: 'numeric' });
+---
+
+<article class="border-b border-border py-6">
+  <a href={`/posts/${post.slug}`} class="no-underline block group">
+    <div class="text-sm text-muted mb-2 flex items-center gap-2">
+      <span>{categoryMeta?.emoji} {categoryMeta?.label}</span>
+      <span>·</span>
+      <time datetime={publishedAt.toISOString()}>{fmt.format(publishedAt)}</time>
+      {experience && <span class="ml-auto text-accent">✓ 직접 사용</span>}
+    </div>
+    <h2 class="text-xl md:text-2xl font-semibold text-fg group-hover:text-accent transition-colors">
+      {title}
+    </h2>
+    <p class="mt-2 text-muted">{description}</p>
+  </a>
+</article>

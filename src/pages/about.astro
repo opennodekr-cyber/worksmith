@@ -1,0 +1,49 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { SITE } from '@/consts';
+---
+
+<BaseLayout title="소개" description={`${SITE.name} 매거진을 만드는 사람과 이유`}>
+  <article class="container-prose py-12 prose-magazine">
+    <h1>{SITE.name} 소개</h1>
+
+    <p class="text-lg text-muted">
+      {SITE.tagline}
+    </p>
+
+    <h2>왜 만드나</h2>
+    <p>
+      AI 도구는 매주 새로 나옵니다. 1인 기업·프리랜서·작은 사무실 사장님들은 정작 그 도구들을
+      <strong>실제로 비교해볼 시간이 없습니다</strong>. 한국어 지원은 되는지, 한국 결제는 되는지,
+      월 비용은 환율로 얼마인지 — 영어권 매체는 알려주지 않습니다.
+    </p>
+    <p>
+      <strong>{SITE.name}</strong>은 1인 AI 기업을 <em>진짜로 만드는 중인</em> 사장이 직접 써본
+      도구만 정리하는 매거진입니다.
+    </p>
+
+    <h2>누가 만드나</h2>
+    <p>
+      벤처 스튜디오 <a href={SITE.parentUrl} target="_blank" rel="noopener"><strong>{SITE.parent}</strong></a>가
+      운영하는 매거진 사업입니다. {SITE.parent}는 AI 에이전트 12명(전략·운영·기술·콘텐츠)을 기반으로
+      여러 작은 사업을 인큐베이팅하는 1인 벤처 스튜디오이며, {SITE.name}은 그 첫 번째 사업입니다.
+    </p>
+    <p>
+      편집·작성·검수는 사장 본인과 {SITE.parent}의 콘텐츠팀 에이전트(전략·작가·에디터)가 함께
+      진행합니다. 이 운영 자체를 매거진의 build-in-public 시리즈로 공개합니다.
+    </p>
+
+    <h2>약속</h2>
+    <ul>
+      <li>직접 안 써본 도구는 그렇게 표기합니다 ("저는 안 써봤지만, 사용자 후기 기준...")</li>
+      <li>제휴 링크가 있으면 글 상단에 명시합니다. 제휴 수익이 추천에 영향을 주지 않습니다.</li>
+      <li>한국어 지원, 한국 결제 가능 여부, 월 환율 기준 비용을 매번 명시합니다.</li>
+      <li>단점도 1개 이상 적습니다. 장점만 나열은 신뢰를 떨어뜨립니다.</li>
+    </ul>
+
+    <h2>연락</h2>
+    <p>
+      <a href={`mailto:${SITE.author.email}`}>{SITE.author.email}</a>
+    </p>
+  </article>
+</BaseLayout>
