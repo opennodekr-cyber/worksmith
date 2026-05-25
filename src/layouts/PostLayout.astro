@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { title, description, publishedAt, updatedAt, category, tags, experience, affiliateLinks } =
+const { title, description, publishedAt, updatedAt, category, experience, affiliateLinks } =
   post.data;
 
 const categoryMeta = CATEGORIES.find((c) => c.slug === category);
@@ -61,7 +61,14 @@ const structuredData = {
             </>
           )
         }
-        {experience && <span class="ml-auto text-accent">✓ 사장님 직접 사용</span>}
+        {experience && (
+          <span class="ml-auto inline-flex items-center gap-1 bg-accent text-accent-fg text-xs font-medium px-2 py-0.5 rounded">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            사장님 직접 사용
+          </span>
+        )}
       </div>
 
       {
@@ -77,19 +84,6 @@ const structuredData = {
       <slot />
     </div>
 
-    {
-      tags.length > 0 && (
-        <footer class="mt-12 pt-6 border-t border-border">
-          <div class="flex flex-wrap gap-2">
-            {tags.map((tag) => (
-              <span class="text-xs text-muted bg-surface border border-border rounded-full px-3 py-1">
-                #{tag}
-              </span>
-            ))}
-          </div>
-        </footer>
-      )
-    }
   </article>
 
   <NewsletterCTA />

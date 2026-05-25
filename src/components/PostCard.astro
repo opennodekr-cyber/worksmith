@@ -18,7 +18,14 @@ const fmt = new Intl.DateTimeFormat('ko-KR', { year: 'numeric', month: 'short', 
       <span>{categoryMeta?.emoji} {categoryMeta?.label}</span>
       <span>·</span>
       <time datetime={publishedAt.toISOString()}>{fmt.format(publishedAt)}</time>
-      {experience && <span class="ml-auto text-accent">✓ 직접 사용</span>}
+      {experience && (
+        <span class="ml-auto inline-flex items-center gap-1 bg-accent text-accent-fg text-xs font-medium px-2 py-0.5 rounded">
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+          직접 사용
+        </span>
+      )}
     </div>
     <h2 class="text-xl md:text-2xl font-semibold text-fg group-hover:text-accent transition-colors">
       {title}
